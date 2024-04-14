@@ -1,3 +1,7 @@
+# notes
+Makemore is a character-level language model. Makemore models sequences of characters, thus it predicts the next character in a sequence. 
+
+- Bigram models local structure. It processes two characters at a time: based on character, predict the next character
 
 # makemore
 
