@@ -1,8 +1,8 @@
-# notes
+# notes 
 Makemore is a character-level language model. Makemore models sequences of characters, thus it predicts the next character in a sequence. 
 
 - Bigram models local structure in a dataset. It processes two characters at a time: based on character, predict the next character.
-So, a bigram is a tuple of characters. Local structure can be modelled by counting the bigrams in the dataset.
+So, a bigram is a tuple of characters. Local structure can be modelled by counting the bigrams in the dataset. ##
 
 # makemore
 
