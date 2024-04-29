@@ -4,6 +4,8 @@ Makemore is a character-level language model. Makemore models sequences of chara
 - Bigram models local structure in a dataset. It processes two characters at a time: based on character, predict the next character.
 So, a bigram is a tuple of characters. Local structure can be modelled by counting the bigrams in the dataset: for every character, probabilities for the next character. The resulting names seem terrible, but performs way better than an 'untrained' (random, uniform distribution) model.
 
+https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
+
 # makemore
 
 makemore takes one text file as input, where each line is assumed to be one training thing, and generates more things like it. Under the hood, it is an autoregressive character-level language model, with a wide choice of models from bigrams all the way to a Transformer (exactly as seen in GPT). For example, we can feed it a database of names, and makemore will generate cool baby name ideas that all sound name-like, but are not already existing names. Or if we feed it a database of company names then we can generate new ideas for a name of a company. Or we can just feed it valid scrabble words and generate english-like babble.
