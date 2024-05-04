@@ -2,7 +2,17 @@
 Makemore is a character-level language model. Makemore models sequences of characters, thus it predicts the next character in a sequence. 
 
 - Bigram models local structure in a dataset. It processes two characters at a time: based on character, predict the next character.
+
 So, a bigram is a tuple of characters. Local structure can be modelled by counting the bigrams in the dataset: for every character, probabilities for the next character. The resulting names seem terrible, but performs way better than an 'untrained' (random, uniform distribution) model.
+
+We trained the bigram language model by counting the number of ocurrences of any pairing and then normalizing (probability distribution). The elements are the parameters of the bigram language model, summmarizing the statistics of the bigrams. After training, we sample from the model: iteratively sample next character. 
+
+How to evaluate quality of the model? (Average) negative log likelihood loss*. So, the goal (during training) is to find the parameters to minimize the loss.
+*Maximize product of probabilites (likelihood) of the data wrt model parameters (probability that the model assigns to every bigram; if the model is perfect, then these should be all 1) = Maximize the sum of log probabilities (log likelihood, otherwise likelihood can get become tiny number) = minimizing negative log likelihood (loss function should be negative)
+
+note: when a bigram doesn't appear in the dataset, then the loss is infinity (not desirable ofc). Apply model smoothing, adding fake counts.
+
+- neural network
 
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
