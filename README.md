@@ -26,6 +26,8 @@ The neural network outputs logits that can be interpreted as log counts. Then pe
 
 How can we tune the weights to achieve better outputs? Evaluate output (probability that model assigned to label character) by computing negative log likelihood for every example and then averaging it. So, minimize the loss by tuning the weights by computing the gradients of the loss wrt the weights. This is very comparable in micrograd, but using pytorch.
 
+The loss of the neural network is about the same as the loss of the model before, because we don't take in any additional information. The explicit approach (counting the pairs) for a bigram language model captures the information very well without needing to perform gradient-based optimization. However, the gradient-based approach is very flexible. In a next step, the neural network can be made more complex: F.e. by taking mulltiple previous characters, using transformers...
+
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
 # makemore
