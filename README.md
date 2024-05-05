@@ -12,7 +12,7 @@ How to evaluate quality of the model? (Average) negative log likelihood loss*. S
 
 note: when a bigram doesn't appear in the dataset, then the loss is infinity (not desirable ofc). Apply model smoothing, adding fake counts.
 
-- neural network
+- Cast bigram language model into neural network framework. neural network will be bigram character-level language model: it receives single character as input, then neural network with some weights and gives back probability distribution over next character as output. Evaluate the output of the model using loss funtion. Train the network with gradient-based optimization to tune the weights of the network.
 
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
