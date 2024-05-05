@@ -24,7 +24,7 @@ At the moment, the neural network consists out of only a single layer of 27 neur
 
 The neural network outputs logits that can be interpreted as log counts. Then perform softmax. So, these are exponentiated to get the counts and then normalized to get the probabilities. This is the forward pass.
 
-How can we tune the weights to achieve better outputs? Evaluate output (probability that model assigned to label character) by computing negative log likelihood for every example and then averaging it. So, minimize the loss by tuning the weights by computing the gradients of the loss wrt the weights. This is very comparable in micrograd. 
+How can we tune the weights to achieve better outputs? Evaluate output (probability that model assigned to label character) by computing negative log likelihood for every example and then averaging it. So, minimize the loss by tuning the weights by computing the gradients of the loss wrt the weights. This is very comparable in micrograd, but using pytorch.
 
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
