@@ -22,6 +22,8 @@ note: difference between torch.tensor and torch.Tensor. torch.tensor infers dtyp
 
 At the moment, the neural network consists out of only a single layer of 27 neurons. With matrix multiplication it's very easy to evaluate the dot product between examples and neurons (neuron performs wx(+b)): F.e. perform matrix multiplication of 5 examples (5,27) and 27 neurons (27,27): this outputs the firing rate for every neuron on every example (5,27). 
 
+The neural network outputs logits that can be interpreted as log counts. So, these are exponentiated to get the counts and then normalized to get the probabilities. 
+
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
 # makemore
