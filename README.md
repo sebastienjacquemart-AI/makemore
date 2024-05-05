@@ -16,9 +16,11 @@ note: when a bigram doesn't appear in the dataset, then the loss is infinity (no
 
 neural network will be bigram character-level language model: it receives single character as input, then neural network with some weights and gives back probability distribution over next character as output. Evaluate the output of the model using loss funtion. Train the network with gradient-based optimization to tune the weights of the network.
 
-Prepare train set by having a character and label set. The label set contains the next characters. The characters are encoded as integers (index). How to feed in these examples into neural network? Input neuron shouldn't take on integer values, because they are multiplied with weights. Typical way to encode integers is one-hot encoding.
+Prepare train set by having a character and label set. The label set contains the next characters. The characters are encoded as integers (index). How to feed in these examples into neural network? Input neuron shouldn't take on integer values, because they are multiplied with weights. Typical way to encode integers is one-hot encoding (as floats).
 
 note: difference between torch.tensor and torch.Tensor. torch.tensor infers dtype; while torch.Tensor returns float.
+
+At the moment, the neural network consists out of only a single layer of 27 neurons. With matrix multiplication it's very easy to evaluate the dot product between examples and neurons (neuron performs wx(+b)): F.e. perform matrix multiplication of 5 examples (5,27) and 27 neurons (27,27): this outputs the firing rate for every neuron on every example (5,27). 
 
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
