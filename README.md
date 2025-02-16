@@ -49,6 +49,8 @@ The network is trained on a small dataset, the loss will decrease a lot. This in
 
 when training on the full dataset, the forward and backward pass take a lot of time. This can be solved by using mini-batches: randomly select portions of the data (mini-batch) and perform the forward and backward pass only on these mini-batches. When working with mini-batches, the quality of the gradient is lower (the direction is less reliable). But it's much better to have an approximate gradient and make more steps, then to calculate the exact gradient with fewer steps. 
 
+The learning rate defines the size of the steps the network takes during training. A very low learning rate (small steps) means the loss decreases slowly. A very high learning rate means the loss can explode (unstable). The ideal learning rate is somewhere in between these two figures. Train the network with different learning rates in between and check which gets the best resulting loss. Learning rate decay (by factor of 10 for example).
+
 
 
 # makemore
