@@ -31,7 +31,25 @@ The loss of the neural network is about the same as the loss of the model before
 https://pytorch.org/docs/stable/notes/broadcasting.html keepdim
 
 - Multi-layer perceptron model 
-Problem with previous approach: context of only a single character. If more characters are added as contexts, the matrix becomes exponentially bigger. So, try MLP: [Bengio et al. 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf). 
+Problem with previous approach: context of only a single character. If more characters are added as contexts, the matrix becomes exponentially bigger. So, try MLP: [Bengio et al. 2003](https://www.jmlr.org/papers/volume3/bengio03a/bengio03a.pdf).
+
+Difference with bigram character-level language model: it receives multiple characters as input instead of a single character. 
+
+The dataset is rebuild by using a block size (the amount of characters used as context). So, the character set is expanded to a number of characters that is equal to the block size. In the next step, the embedding lookup table is created to represent the characters (which are represented as integers) in a lower-dimensional space. 
+
+So, the input to the hidden layer is a number of characters (equal to the block size) that are represented as low-dimensional vectors instead of integers or one-hot encoding. The hidden layer thus has following dimenion: number of neurons (this is a hyperparameter*) x (block size x vector dimension). The input characters are concatenated to fit the hidden layer.
+
+*hyperparameters are parameters that are up to the desginer of the network (f.e. the size of the hidden layer)
+
+The output layer has a dimension: number of neurons x the number of characters. Again, the output are logits. So, these need to be exponentiated to create fake counts and finally normalized to get a probability distribution over the characters. The model is trained with backpropagation and the negative log likelihood like the bigram model.
+
+The last steps (from logits to loss) can be done much more efficiently using cross-entropy. Why? 1. the forward pass can be made much more efficient (no intermediate tensors); 2. the backward pass can be made much more efficient; 3. more numerically well-behaved (substract the max positive value from the logits)
+
+The network is trained on a small dataset, the loss will decrease a lot. This indicates that the network is overfitting the data. The network can't completely overfit the data (0 loss), because some examples have different labels in the dataset. In the case where a unique input has a unique output, the network performs very well.
+
+when training on the full dataset, the forward and backward pass take a lot of time. This can be solved by using mini-batches: randomly select portions of the data (mini-batch) and perform the forward and backward pass only on these mini-batches. When working with mini-batches, the quality of the gradient is lower (the direction is less reliable). But it's much better to have an approximate gradient and make more steps, then to calculate the exact gradient with fewer steps. 
+
+
 
 # makemore
 
