@@ -35,7 +35,7 @@ Problem with previous approach: context of only a single character. If more char
 
 Difference with bigram character-level language model: it receives multiple characters as input instead of a single character. 
 
-The dataset is rebuild by using a block size (the amount of characters used as context). So, the character set is expanded to a number of characters that is equal to the block size. In the next step, the embedding lookup table is created to represent the characters (which are represented as integers) in a lower-dimensional space. 
+The dataset is rebuild by using a block size (the amount of characters used as context). So, the character set is expanded to a number of characters that is equal to the block size. In the next step, the embedding lookup table is created to represent the characters (which are represented as integers) in a lower-dimensional space. These lookup tables are also parameters that will be trained. 
 
 So, the input to the hidden layer is a number of characters (equal to the block size) that are represented as low-dimensional vectors instead of integers or one-hot encoding. The hidden layer thus has following dimenion: number of neurons (this is a hyperparameter*) x (block size x vector dimension). The input characters are concatenated to fit the hidden layer.
 
@@ -51,7 +51,9 @@ when training on the full dataset, the forward and backward pass take a lot of t
 
 The learning rate defines the size of the steps the network takes during training. A very low learning rate (small steps) means the loss decreases slowly. A very high learning rate means the loss can explode (unstable). The ideal learning rate is somewhere in between these two figures. Train the network with different learning rates in between and check which gets the best resulting loss. Learning rate decay (by factor of 10 for example).
 
+If the capacity of the neural network grows (more parameters), it becomes more capable of overfitting the dataset: the loss on the training set is very low (approx 0), but the loss on data points outside of the training set will be much higher. It memorizes the data from the training set. Split dataset in three splits: train, dev/validation and test split (80-10-10). The training set is used to optimize the parameters of the model; the development/validation split is used for development of hyperparameters of the model; test split is used to evaluate the performance of the network. When training and development loss are close to each other, it indicates that the network is not overfitting, but underfitting. So, the model is too small and performance improvements can be achieved by scaling up the model. When they are not close to each other, it indicates that the network is overfitting. 
 
+If the batch size is set too low, then the gradient might become noisy. So, increase the batch size to be able to optimize more properly.  
 
 # makemore
 
