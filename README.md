@@ -55,6 +55,8 @@ If the capacity of the neural network grows (more parameters), it becomes more c
 
 If the batch size is set too low, then the gradient might become noisy. So, increase the batch size to be able to optimize more properly.  
 
+Before we move on to other models, we have to understand the activations and gradients of the multi-layer perceptron model during training.
+
 # makemore
 
 makemore takes one text file as input, where each line is assumed to be one training thing, and generates more things like it. Under the hood, it is an autoregressive character-level language model, with a wide choice of models from bigrams all the way to a Transformer (exactly as seen in GPT). For example, we can feed it a database of names, and makemore will generate cool baby name ideas that all sound name-like, but are not already existing names. Or if we feed it a database of company names then we can generate new ideas for a name of a company. Or we can just feed it valid scrabble words and generate english-like babble.
