@@ -63,6 +63,7 @@ Before we move on to other models, we have to understand the activations and gra
 
 *The more the output is in the flat tales, the more the gradient is squashed. If output of the activation function for a certain neuron is in the flat region of the tanh-function, then the weights and the biases of this neuron will stop influencing the loss and the gradient will be destroyed. So, no matter how the weights or biases are changed, it doesn't activate the neuron in the active part of the tanh or it doesn't infleunce the output and the loss. 
 
+In the case of a shallow network (1/2 layers), the network can be forgiving for these problems. However, when the network gets deeper, these problems stack up. 
 # makemore
 
 makemore takes one text file as input, where each line is assumed to be one training thing, and generates more things like it. Under the hood, it is an autoregressive character-level language model, with a wide choice of models from bigrams all the way to a Transformer (exactly as seen in GPT). For example, we can feed it a database of names, and makemore will generate cool baby name ideas that all sound name-like, but are not already existing names. Or if we feed it a database of company names then we can generate new ideas for a name of a company. Or we can just feed it valid scrabble words and generate english-like babble.
