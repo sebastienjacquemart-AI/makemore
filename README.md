@@ -53,9 +53,15 @@ The learning rate defines the size of the steps the network takes during trainin
 
 If the capacity of the neural network grows (more parameters), it becomes more capable of overfitting the dataset: the loss on the training set is very low (approx 0), but the loss on data points outside of the training set will be much higher. It memorizes the data from the training set. Split dataset in three splits: train, dev/validation and test split (80-10-10). The training set is used to optimize the parameters of the model; the development/validation split is used for development of hyperparameters of the model; test split is used to evaluate the performance of the network. When training and development loss are close to each other, it indicates that the network is not overfitting, but underfitting. So, the model is too small and performance improvements can be achieved by scaling up the model. When they are not close to each other, it indicates that the network is overfitting. 
 
-If the batch size is set too low, then the gradient might become noisy. So, increase the batch size to be able to optimize more properly.  
+If the batch size is set too low, then the gradient might become noisy. So, increase the batch size to be able to optimize more properly. 
 
-Before we move on to other models, we have to understand the activations and gradients of the multi-layer perceptron model during training.
+Before we move on to other models, we have to understand the activations and gradients of the multi-layer perceptron model during training. Let's look at a few problems with initialization first:
+
+1. Initialization of logits. Rough idea of the initial loss using the definition of the loss and the problem at hand: The initial output probablity distribution should be uniform (random). So, the probability for any character should be 1/27. The negative log likelihood of this number is the expected initial loss. In case of high initial loss, the network is very confidently wrong (extreme logits). The output logits should be close to zero. This can be achieved by 1. zero bias; 2. scale down weights of output layer. 
+
+2. Initialization of activation of hidden states. Tanh-function squashes number between a range of 1 and -1. When the distribution of the tanh-values (after activation) mostly take on values of 1 or -1, then there's a problem. The cause can be found in the distribution of the values before activation which is very broad. Why is this a problem? If many of the neurons are in the flat regions of 1 or -1, then the backward gradients will get destroyed at this layer*. A dead neuron happens when all the examples land in the tale region (no example activates the neuron in the active part of the neuron), this way the neuron will never learn. This problem is true for many activation functions, except Leaky ReLu. This problem can be fixed by scaling down the biases and the weights. 
+
+*The more the output is in the flat tales, the more the gradient is squashed. If output of the activation function for a certain neuron is in the flat region of the tanh-function, then the weights and the biases of this neuron will stop influencing the loss and the gradient will be destroyed. So, no matter how the weights or biases are changed, it doesn't activate the neuron in the active part of the tanh or it doesn't infleunce the output and the loss. 
 
 # makemore
 
