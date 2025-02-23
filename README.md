@@ -55,7 +55,7 @@ If the capacity of the neural network grows (more parameters), it becomes more c
 
 If the batch size is set too low, then the gradient might become noisy. So, increase the batch size to be able to optimize more properly. 
 
-Before we move on to other models, we have to understand the activations and gradients of the multi-layer perceptron model during training. Let's look at a few problems with initialization first:
+- Before we move on to other models, we have to understand the activations and gradients of the multi-layer perceptron model during training. Let's look at a few problems with initialization first:
 
 1. Initialization of logits. Rough idea of the initial loss using the definition of the loss and the problem at hand: The initial output probablity distribution should be uniform (random). So, the probability for any character should be 1/27. The negative log likelihood of this number is the expected initial loss. In case of high initial loss, the network is very confidently wrong (extreme logits). The output logits should be close to zero. This can be achieved by 1. zero bias; 2. scale down weights of output layer. 
 
@@ -76,6 +76,10 @@ A real-life example: resnet50. This is a convolutional neural network that excel
 Let's look at gradient and activation statistics in case of no batch normalization and the relation to the gain. In case of no gain, the standard deviation of the first layer is 1, but due to the non-linearity layers, the distribution of the layers gets squashed and the standard deviation shrinks (low saturation, where saturation is the amount of values of the neurons that are in the tales of the non-linearity). In case of right gain, the standard deviation of the first layer is high, but it will stabilize in the next layers (decent saturation). In case of low gain, the standard deviation of the gradients will grow. In case of high gain, the standard deviation of the gradients shrinks. In case of right gain, the distribution of the gradients stays roughly the same. So, why do we even need non-linearity layers? No matter how many linear layers are stacked, the result will be a linear function. Also important to look at the statistics of the parameters. Important new statistics: 1. gradient-to-parameter ratio, which shows the scale of the gradient compared to the scale of the actual weights. Ideally, this ratio is small; 2. update-to-data ratio over iterations, which shows the standard deviation of the update (learning rate*gradient) compared to the log of the standard deviation of the weights (how great are the updates to the weights?) over iterations. Ideally, these ratios are around 1e-3. If this ratio is higher, then the weights are undergoing a lot of change. In this case, the last layer has a high ratio. Ideally, all these statistics are roughly symmetrical for all the layers. These plots are a good way to bring miscalibrations to your attention. 
 
 With batch normalization the network is way more robust to the gain of the linear layers. It's not a free pass, the update-to-data ratio can be messed up...
+
+- Let's implement backpropagation manually for the mlp model. We did this in micrograd, but on element-level. Now, we implement it on tensor-level.
+
+
 
 
 
