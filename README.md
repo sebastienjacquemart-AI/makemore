@@ -79,7 +79,7 @@ With batch normalization the network is way more robust to the gain of the linea
 
 - Let's implement backpropagation manually for the mlp model. We did this in micrograd, but on element-level. Now, we implement it on tensor-level.
 
-
+The output of the network are log probabilities for all possible characters for every example in the batch (logprobs). The loss is the negative mean of the logprobs for the correct (groundtruth) characters for every example in the batch. Calculate the gradient as the derivative of the loss with respect to all the elements in logprobs (dlogprobs). dlogporbs will be -1/n for all correct elements. dlogprobs will be zero for all incorrect incorrect elements, because they don't feed into the loss (if these numbers are changed, then the loss doesn't change). 
 
 
 
