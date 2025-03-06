@@ -81,7 +81,9 @@ With batch normalization the network is way more robust to the gain of the linea
 
 The output of the network are log probabilities for all possible characters for every example in the batch (logprobs). The loss is the negative mean of the logprobs for the correct (groundtruth) characters for every example in the batch. Calculate the gradient as the derivative of the loss with respect to all the elements in logprobs (dlogprobs). dlogporbs will be -1/n for all correct elements. dlogprobs will be zero for all incorrect incorrect elements, because they don't feed into the loss (if these numbers are changed, then the loss doesn't change). 
 
+The output of the network are logits. The cross-entropy loss is claculated using these logits: For every example, 1. the logits are normalized by substracting the max logit (no influence on probabilities, this is done for stabilit); 2. the normalized logits are exponentiated to get the counts; 3. the counts are divided by the sum of the counts to get the probabilities; 4. the log of the probabilities are taken; 5. the negative mean of the logprobs for the correct examples results in the loss. 
 
+During this exercise, calculate gradient step-by-step: mainly chain rule as in micrograd. However, be careful as some operations are two operations combined: For example, when the counts are normalized by dividing by the sum of the count
 
 
 
