@@ -77,7 +77,7 @@ Let's look at gradient and activation statistics in case of no batch normalizati
 
 With batch normalization the network is way more robust to the gain of the linear layers. It's not a free pass, the update-to-data ratio can be messed up...
 
-- Let's implement backpropagation manually for the mlp model. We did this in micrograd, but on element-level. Now, we implement it on tensor-level.
+- Let's implement backpropagation manually for the mlp model. We did this in micrograd, but on element-level. Now, we implement it on tensor-level.. (SHOULD RE-WATCH THIS VIDEO)
 
 The output of the network are log probabilities for all possible characters for every example in the batch (logprobs). The loss is the negative mean of the logprobs for the correct (groundtruth) characters for every example in the batch. Calculate the gradient as the derivative of the loss with respect to all the elements in logprobs (dlogprobs). dlogporbs will be -1/n for all correct elements. dlogprobs will be zero for all incorrect incorrect elements, because they don't feed into the loss (if these numbers are changed, then the loss doesn't change). 
 
@@ -85,6 +85,7 @@ The output of the network are logits. The cross-entropy loss is claculated using
 
 During this exercise, calculate gradient step-by-step: mainly chain rule as in micrograd. However, be careful as some operations are two operations combined: For example, when the counts are normalized by dividing by the sum of the count
 
+- 
 
 
 # makemore
